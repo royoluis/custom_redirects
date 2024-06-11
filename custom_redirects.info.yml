@@ -1,0 +1,5 @@
+name: 'custom redirects'
+type: module
+description: 'Create custom redirects with an EventSubscriber'
+package: Custom
+core_version_requirement: ^10 || ^11
