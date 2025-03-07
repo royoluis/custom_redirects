@@ -10,6 +10,8 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Drupal\node\NodeInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Handles custom redirects based on kernel events.
@@ -17,19 +19,45 @@ use Drupal\Core\Routing\TrustedRedirectResponse;
 final class CustomRedirectsSubscriber implements EventSubscriberInterface {
 
   /**
+   * The configuration factory.
+   *
+   * @var \Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $requestStack;
+
+  /**
+   * The request stack.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
+   * Constructs a CustomRedirectsSubscriber object.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
+   *   The configuration factory.
+   * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
+   *   The request stack.
+   */
+  public function __construct(ConfigFactoryInterface $configFactory, RequestStack $requestStack) {
+    $this->configFactory = $configFactory;
+    $this->requestStack = $requestStack;
+  }
+
+  /**
    * Kernel request event handler.
    */
   public function onKernelRequest(RequestEvent $event): void {
-    $request = $event->getRequest();
-    $route_name = $request->attributes->get('_route');
-    $node = $request->attributes->get('node');
+    $custom_url = $this->configFactory->get('custom_redirects.settings')->get('url');
+    $request = $this->requestStack->getCurrentRequest();
+    $base_url = $request->getHost();
+    $current_url = $request->getUri();
+    $final_redirect = !empty($custom_url) ? $custom_url : $base_url;
 
-    // Nid 2 is just an example. Set the route you wish. 
-    if ($route_name === 'entity.node.canonical' && $node instanceof NodeInterface && $node->id() == 2) {
+    if (str_contains($current_url, 'user/logout')) {
       user_logout();
-
-      // Drupal.org is just an example. Set the web you wish.
-      $response = new TrustedRedirectResponse('https://www.drupal.org', Response::HTTP_FOUND);
+      $response = new TrustedRedirectResponse($final_redirect, Response::HTTP_FOUND);
       $event->setResponse($response);
     }
   }
