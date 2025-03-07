@@ -1,0 +1,5 @@
+custom_redirects.config_form:
+  title: 'Custom redirects module settings'
+  description: 'Configure custom redirects after logging out'
+  route_name: custom_redirects.custom_config
+  parent: 'system.admin_config_development'
