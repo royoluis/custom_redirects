@@ -1,0 +1,9 @@
+custom_redirects.custom_config:
+  path: '/admin/config/development/custom_redirects'
+  defaults:
+    _form: '\Drupal\custom_redirects\Form\CustomConfigForm'
+    _title: 'Custom redirects module settings'
+  requirements:
+    _permission: 'administer site configuration'
+  options:
+    _admin_route: TRUE
