@@ -3,7 +3,7 @@
 <p>Feel free to use and share it</p>
 <h3>How to configure custom redirects</h3>
 <ol>
-  <li>Install this module on your Drupal site.</li>
+  <li><b>Install this module</b> on your Drupal site.</li>
   <br>
   <li>Go to your <b>site configuration</b>.</li>
 
@@ -15,7 +15,7 @@
   
   <li><b>Type the URL you want users to be redirected to</b> after logging out.</li>
 
-  ![image](https://github.com/user-attachments/assets/5c4aa9ff-0052-4105-971f-1b6091ef35c4)
+  ![image](https://github.com/user-attachments/assets/8864a94b-1981-408a-88c6-5ff148a7ad3f)
 
   <li>Click on <b>"Save configuration"</b>.</li>
 </ol>
