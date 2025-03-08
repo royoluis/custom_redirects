@@ -45,23 +45,6 @@ final class CustomRedirectsSubscriber implements EventSubscriberInterface {
   }
 
   /**
-   * Kernel request event handler.
-   */
-  public function onKernelRequest(RequestEvent $event): void {
-    $custom_url = $this->configFactory->get('custom_redirects.settings')->get('url');
-    $request = $this->requestStack->getCurrentRequest();
-    $base_url = $request->getHost();
-    $current_url = $request->getUri();
-    $final_redirect = !empty($custom_url) ? $custom_url : "https://" . $base_url;
-
-    if (str_contains($current_url, 'user/logout')) {
-      user_logout();
-      $response = new TrustedRedirectResponse($final_redirect, Response::HTTP_FOUND);
-      $event->setResponse($response);
-    }
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function getSubscribedEvents(): array {
@@ -70,5 +53,21 @@ final class CustomRedirectsSubscriber implements EventSubscriberInterface {
     ];
   }
 
-}
+  /**
+   * Kernel request event handler.
+   */
+  public function onKernelRequest(RequestEvent $event): void {
+    $request = $this->requestStack->getCurrentRequest();
+    $current_url = $request->getUri();
 
+    if (str_contains($current_url, 'user/logout')) {
+      $base_url = $request->getHost();
+      $custom_url = $this->configFactory->get('custom_redirects.settings')->get('url');
+      $final_redirect = !empty($custom_url) ? $custom_url : "https://" . $base_url;
+      user_logout();
+      $response = new TrustedRedirectResponse($final_redirect, Response::HTTP_FOUND);
+      $event->setResponse($response);
+    }
+  }
+
+}
