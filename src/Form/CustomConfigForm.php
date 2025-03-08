@@ -28,7 +28,7 @@ class CustomConfigForm extends ConfigFormBase {
 
     $form['url'] = [
       '#type' => 'textfield',
-      '#title' => t('URL to redirect after login out'),
+      '#title' => t('URL to redirect to after logging out'),
       '#default_value' => $config->get('url'),
     ];
 
