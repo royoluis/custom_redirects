@@ -4,3 +4,29 @@
  * @file
  * Primary module hooks for custom redirects module.
  */
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function custom_redirects_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.custom_redirects':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module allows users to be redirected to a page of their choice after logging out.') . '</p>';
+      $output .= '<p>' . t('Feel free to use and share it.') . '</p>';
+      $output .= '<h3>' . t('How to configure custom redirects') . '</h3>';
+      $output .= '<ol>';
+      $output .= '<li><b>' . t('Install this module') . '</b> ' . t('on your Drupal site.') . '</li>';
+      $output .= '<li>' . t('Go to your') . ' <b>' . t('site configuration') . '</b>.</li>';
+      $output .= '<li>' . t('Click on') . ' <b>' . t('"Custom redirects module settings"') . '.</b></li>';
+      $output .= '<li><b>' . t('Type the URL you want users to be redirected to') . '</b> ' . t('after logging out.') . '</li>';
+      $output .= '<li>' . t('Click on') . ' <b>' . t('"Save configuration"') . '.</b></li>';
+      $output .= '</ol>';
+      $output .= '<h3>' . t('What happens if you don\'t set a custom URL?') . '</h3>';
+      $output .= '<p>' . t('This module will redirect users to your site home page after logging out.') . '</p>';
+      return $output;
+    default:
+  }
+}
