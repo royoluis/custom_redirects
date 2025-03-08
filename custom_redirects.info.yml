@@ -1,4 +1,4 @@
-name: 'custom redirects'
+name: 'Custom Redirects'
 type: module
 description: 'Create custom redirects with an EventSubscriber'
 package: Custom
