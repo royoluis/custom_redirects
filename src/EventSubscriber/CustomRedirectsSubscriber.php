@@ -53,7 +53,7 @@ final class CustomRedirectsSubscriber implements EventSubscriberInterface {
     $request = $this->requestStack->getCurrentRequest();
     $base_url = $request->getHost();
     $current_url = $request->getUri();
-    $final_redirect = !empty($custom_url) ? $custom_url : $base_url;
+    $final_redirect = !empty($custom_url) ? $custom_url : "https://" . $base_url;
 
     if (str_contains($current_url, 'user/logout')) {
       user_logout();
