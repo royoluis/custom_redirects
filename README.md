@@ -1,6 +1,5 @@
 <h1>Module description and functionality</h1>
 <p>This module allows users to be redirected to a page of your choice after logging out</p>
-<p>Feel free to use and share it</p>
 <h2>How to configure custom redirects</h2>
 <ol>
   <li><b>Install this module</b> on your Drupal site.</li>
@@ -22,3 +21,7 @@
 <br>
 <h2>What happens if you don't set a custom URL?</h2>
 <p>This module will redirect users to your site home page after logging out.</p>
+<h2>Installation</h2>
+<p>Install as you would normally install a contributed Drupal module.</p>
+<p>See: https://www.drupal.org/node/895232 for further information.</p>
+<p>Feel free to share and use this custom module.</p>
