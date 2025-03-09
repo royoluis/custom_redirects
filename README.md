@@ -1,5 +1,5 @@
 <h1>Module description and functionality</h1>
-<p>This module allows users to be redirected to a page of their choice after logging out</p>
+<p>This module allows users to be redirected to a page of your choice after logging out</p>
 <p>Feel free to use and share it</p>
 <h2>How to configure custom redirects</h2>
 <ol>
